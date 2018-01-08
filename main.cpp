@@ -5,27 +5,29 @@
 using namespace std;
 int main()
 {
-   /***************** finding two repeating elements in the array*/////////////
-   int n,size_,*arr,i,res=0;
-   cin>>size_>>n;
-   arr=new int[size_];
-   for(i=1;i<=size_;i++)
-    {
-        cin>>arr[i];
-        res=res^arr[i];
-    }
-   for(int i=1;i<=n;i++)
+   /***************** given an array find two numbers in the array such that their sum is equal to k*/////////////
+   int i,n,*arr,j,k;
+   cin>>n>>k;
+   arr=new int[n];
+   for(i=0;i<n;i++)
+    cin>>arr[i];
+   sort(arr,arr+n);
+   for(i=0,j=n-1;i<j;)
    {
-       res=res^i;
+       int sum=arr[i]+arr[j];
+       if(sum==k)
+       {
+           cout<<"yes result found"<<i<<" "<<j;
+           break;
+       }
+       else
+        if(sum>k)
+       {
+           j--;
+       }
+       else
+        i++;
+
    }
-   int right_most_set_bit=(res)&~(res-1);
-   int x=0,y=0;
-   for(i=1;i<=size_;i++)
-    {
-        if(arr[i]&right_most_set_bit)
-            x^=arr[i];
-        else
-            y^=arr[i];
-    }
-    cout<<x<<" "<<y;
+
 }
