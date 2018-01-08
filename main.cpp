@@ -6,17 +6,19 @@ using namespace std;
 int main()
 {
    /***************** finding missing number in an array*/////////////
-   int n,*arr,i;
+   int n,*arr,i,*arr2;
    cin>>n;
    arr=new int[n];
+   arr2=new int[n+1]();
    for(i=1;i<n;i++)
     cin>>arr[i];
-   int sum=0;
-   for(int i=1;i<=n;i++)
-    sum+=i;
    for(i=1;i<n;i++)
-    sum-=arr[i];
-   cout<<sum;
-
+    arr2[arr[i]]=1;
+   for(i=1;i<=n;i++)
+    if(!arr2[i])
+   {
+       cout<<i;
+       break;
+   }
 
 }
