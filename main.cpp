@@ -1,13 +1,18 @@
 #include <iostream>
 #include<map>
+#include<stdlib.h>
 #include<algorithm>
 #define pp pair<int,int>
 using namespace std;
+/***************used it to avoid overflow*/////////////////////
+unsigned int absu(int value) {
+    return (value < 0) ? -((unsigned int)value) : (unsigned int)value;
+}
 int main()
 {
-   /***************** find three numbers in an array whose sum is equal to k*/////////////
-   int i,ni,*arr,j,k,q,flag=0,l,h,temp=0;
-   cin>>ni>>k;
+   /***************** find three numbers in an array whose sum is closest to zero*/////////////
+   int i,ni,*arr,j,k,q,flag=0,l,h,temp=0,positive=INT_MAX,negative=INT_MIN;
+   cin>>ni;
    arr=new int[ni];
    for(i=0;i<ni;i++)
    {
@@ -17,7 +22,7 @@ int main()
    cout<<"sorted array is:"<<endl;
    for(i=0;i<ni;i++)
    {
-        cout<<arr[i];
+        cout<<arr[i]<<" ";
    }
    cout<<"\n";
    for(i=0;i<ni-2&&!flag;i++)
@@ -25,21 +30,31 @@ int main()
        l=i+1;
        h=ni-1;
        for(;l<h&&!flag;)
-       {   temp=arr[i]+arr[l]+arr[h];
-           if(temp==k)
+       {
+           //cout<<positive<<" "<<negative<<endl;
+            temp=arr[i]+arr[l]+arr[h];
+           if(temp>0)
            {
-               flag=1;
-           }
-           else
-           if(temp>k)
-           {
+               if(temp<positive)
+                positive=temp;
                h--;
            }
            else
-            l++;
+           if(temp<0)
+           {
+               if(temp>negative)
+                negative=temp;
+               l++;
+           }
+           else
+           {
+               positive=0;
+               negative=0;
+               flag=1;
+           }
     }
 
    }
-   if(flag)
-   cout<<"yes"<<i-1<< " "<<l<<" "<<h;
+
+   (absu(positive<absu(negative)))?cout<<positive:cout<<negative;
 }
