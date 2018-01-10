@@ -41,13 +41,13 @@ int binarySearch(int *arr,int start,int last,int data)
 
     if(start>last)
     {
-     return INT_MAX;
+     return INT_MIN;
     }
     else
     {
         int mid=(start+last)/2;
         if(arr[mid]==data)
-        return min(mid,binarySearch(arr,start,mid-1,data));
+        return max(mid,binarySearch(arr,mid+1,last,data));
         else
             if(arr[mid]<data)
             return binarySearch(arr,mid+1,last,data);
