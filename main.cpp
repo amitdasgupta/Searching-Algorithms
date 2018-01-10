@@ -4,7 +4,7 @@
 #include<algorithm>
 #define pp pair<int,int>
 using namespace std;
-/**************given an array which is rotated many times find the index of any given element*///////////////
+/**************given an array which is rotated many times find the index of any given element
 int indexOfArray(int *arr,int start,int last)
 {
     if(start==last)
@@ -34,18 +34,20 @@ int indexOfArray(int *arr,int start,int last)
             return INT_MIN;
     }
 }
+*/
+/************binary search code to print first occurence of a number*////////////
 int binarySearch(int *arr,int start,int last,int data)
 {
 
     if(start>last)
     {
-     return INT_MIN;
+     return INT_MAX;
     }
     else
     {
         int mid=(start+last)/2;
         if(arr[mid]==data)
-        return mid;
+        return min(mid,binarySearch(arr,start,mid-1,data));
         else
             if(arr[mid]<data)
             return binarySearch(arr,mid+1,last,data);
@@ -101,13 +103,20 @@ int main()
    for(i=0;i<n;i++)
     cin>>arr[i];
    //cout<<"bitonic index is:"<<infiniteBitonicHelp(arr,0,1);
-   int pivot=indexOfArray(arr,0,n-1);
-   cout<<"\n enter data to be searched";
+  /** int pivot=indexOfArray(arr,0,n-1);
+   cout<<"\n enter data to be searched:";
    cin>>data;
    cout<<endl;
       if(binarySearch(arr,0,pivot,data)!=INT_MIN||binarySearch(arr,pivot+1,n-1,data)!=INT_MIN)
       {
           (binarySearch(arr,0,pivot,data)!=INT_MIN)?cout<<binarySearch(arr,0,pivot,data):cout<<binarySearch(arr,pivot+1,n-1,data);
       }
+    */
+   cout<<"\n enter data to be searched:";
+   cin>>data;
+   if(binarySearch(arr,0,n-1,data)==INT_MAX)
+    cout<<"element does not exist";
+   else
+    cout<<binarySearch(arr,0,n-1,data);
    delete[] arr;
 }
