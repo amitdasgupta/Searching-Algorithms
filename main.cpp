@@ -95,6 +95,7 @@ int infiniteBitonicHelp(int *arr,int start,int last)
     cout<<start<<" "<<last;
     return indexOfBitonicArray(arr,start,last);
 }*/////////
+/*******************finding Nth largest element in an array in O(N) time
 int findSecondLrgestNumberArray(int *arr,int n)
 {
     int first=INT_MAX,second=INT_MAX,third=INT_MAX;
@@ -121,6 +122,28 @@ int findSecondLrgestNumberArray(int *arr,int n)
     }
     return third;
 }
+*/////////////
+/****************brute force method to find majority element an array*/////////////////////
+int findMajorityElement(int *arr,int n)
+{
+    int i=0,value=0,count=0,j=0,max=INT_MIN;
+    for(i=0;i<n;i++)
+    {
+        count=0;
+        for(j=0;j<n;j++)
+        {
+            if(arr[i]==arr[j])
+                count++;
+        }
+        if(count>max)
+            {
+                max=count;
+                value=arr[i];
+            }
+    }
+    cout<<"max times:"<<max<<endl;
+    return value;
+}
 int main()
 {
 
@@ -129,7 +152,7 @@ int main()
    arr=new int[n];
    for(i=0;i<n;i++)
     cin>>arr[i];
-   cout<<findSecondLrgestNumberArray(arr,n);
+   cout<<findMajorityElement(arr,n);
 
    delete[] arr;
 }
