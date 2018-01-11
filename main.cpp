@@ -35,7 +35,7 @@ int indexOfArray(int *arr,int start,int last)
     }
 }
 */
-/************binary search code to print first occurence of a number*////////////
+/************binary search code to print last occurence of a number
 int binarySearch(int *arr,int start,int last,int data)
 {
 
@@ -55,6 +55,7 @@ int binarySearch(int *arr,int start,int last,int data)
             return binarySearch(arr,start,mid-1,data);
     }
 }
+*////////////
 /***************** finding bitonic point in bitonic array if array is of infinite size or unknown size
 
 int indexOfBitonicArray(int *arr,int start,int last)
@@ -94,6 +95,32 @@ int infiniteBitonicHelp(int *arr,int start,int last)
     cout<<start<<" "<<last;
     return indexOfBitonicArray(arr,start,last);
 }*/////////
+int findSecondLrgestNumberArray(int *arr,int n)
+{
+    int first=INT_MAX,second=INT_MAX,third=INT_MAX;
+    for(int i=0;i<n;i++)
+    {
+
+        if(arr[i]<first)
+            {
+                third=second;
+                second=first;
+                first=arr[i];
+            }
+        else
+            if(arr[i]<second&&arr[i]!=first)
+            {
+                third=second;
+                second=arr[i];
+            }
+            else
+                if(arr[i]<third&&arr[i]!=first&&arr[i]!=second)
+            {
+                third=arr[i];
+            }
+    }
+    return third;
+}
 int main()
 {
 
@@ -102,21 +129,7 @@ int main()
    arr=new int[n];
    for(i=0;i<n;i++)
     cin>>arr[i];
-   //cout<<"bitonic index is:"<<infiniteBitonicHelp(arr,0,1);
-  /** int pivot=indexOfArray(arr,0,n-1);
-   cout<<"\n enter data to be searched:";
-   cin>>data;
-   cout<<endl;
-      if(binarySearch(arr,0,pivot,data)!=INT_MIN||binarySearch(arr,pivot+1,n-1,data)!=INT_MIN)
-      {
-          (binarySearch(arr,0,pivot,data)!=INT_MIN)?cout<<binarySearch(arr,0,pivot,data):cout<<binarySearch(arr,pivot+1,n-1,data);
-      }
-    */
-   cout<<"\n enter data to be searched:";
-   cin>>data;
-   if(binarySearch(arr,0,n-1,data)==INT_MAX)
-    cout<<"element does not exist";
-   else
-    cout<<binarySearch(arr,0,n-1,data);
+   cout<<findSecondLrgestNumberArray(arr,n);
+
    delete[] arr;
 }
