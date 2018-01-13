@@ -224,7 +224,7 @@ int rowWithMaximum_1(int **arr,int n)
 
 }
 */////////////
-/****************dutch flag algorithm*////////////////
+/****************dutch flag algorithm
 void swapMy(int * &arr,int i,int j)
 {
     int temp=arr[i];
@@ -253,6 +253,23 @@ void DutchFlagAlgo(int * &arr,int n)
         }
     }
 }
+*////////////////
+int maximumDifferenceNumbers(int *arr,int n)
+{
+    int min=arr[0],diffmax=INT_MIN,temp;
+    for(int i=1;i<n;i++)
+    {
+        if(arr[i]<min)
+            min=arr[i];
+        else
+        {
+            temp=arr[i]-min;
+            if(temp>diffmax)
+                diffmax=temp;
+        }
+    }
+    return diffmax;
+}
 int main()
 {
 
@@ -272,8 +289,6 @@ int main()
    int *arr=new int[n];
    for(int i=0;i<n;i++)
     cin>>arr[i];
-   DutchFlagAlgo(arr,n);
-   for(int i=0;i<n;i++)
-    cout<<arr[i]<<" ";
+   cout<<maximumDifferenceNumbers(arr,n);
    delete[] arr;
 }
