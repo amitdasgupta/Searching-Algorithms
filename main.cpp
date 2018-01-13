@@ -162,7 +162,7 @@ int localMinima(int *arr,int start,int last)
 
 }
 */////////////
-/************Search in a row wise and column wise sorted matrix**/////////////
+/************Search in a row wise and column wise sorted matrix
 bool IsPresentInArray(int **arr,int n,int x)
 {
     int i=0,j=n-1;
@@ -185,11 +185,42 @@ bool IsPresentInArray(int **arr,int n,int x)
     }
     if(i<n&&j>=0)
     {
-        cout<<"element is found at"<<i<<" "<<j;
+        cout<<"element is found at:"<<i<<" "<<j;
         return true;
     }
     else
         return false;
+}
+**/////////////
+int leftMostBinarySearch(int *arr,int start,int last,int data)
+{
+    if(start>last)
+        return INT_MAX;
+    {
+        int mid=(start+last)/2;
+        if(arr[mid]==data)
+            return min(mid,leftMostBinarySearch(arr,start,mid-1,data));
+        else
+            if(arr[mid]>data)
+            return leftMostBinarySearch(arr,start,mid-1,data);
+        else
+            return leftMostBinarySearch(arr,mid+1,start,data);
+    }
+}
+int rowWithMaximum_1(int **arr,int n)
+{
+    int row_max=INT_MIN,col_max=INT_MAX;
+    for(int i=0;i<n;i++)
+    {
+        int index=leftMostBinarySearch(arr[i],0,n-1,1);
+        if(index<col_max)
+        {
+            col_max=index;
+            row_max=i;
+        }
+    }
+    return row_max;
+
 }
 int main()
 {
@@ -202,10 +233,10 @@ int main()
    for(i=0;i<n;i++)
     for(j=0;j<n;j++)
     cin>>arr[i][j];
-    cout<<"\n enter element to be searched";
+    cout<<"\n enter element to be searched:";
     cin>>data;
-   if(IsPresentInArray(arr,n,data))
-for(int i=0;i<n;i++)
+   cout<<rowWithMaximum_1(arr,n);
+    for(int i=0;i<n;i++)
     delete[] arr[i];
    delete[] arr;
 }
