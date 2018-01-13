@@ -123,7 +123,7 @@ int findSecondLrgestNumberArray(int *arr,int n)
     return third;
 }
 */////////////
-/****************brute force method to find majority element an array*/////////////////////
+/****************brute force method to find majority element an array
 int findMajorityElement(int *arr,int n)
 {
     int i=0,value=0,count=0,j=0,max=INT_MIN;
@@ -144,15 +144,68 @@ int findMajorityElement(int *arr,int n)
     cout<<"max times:"<<max<<endl;
     return value;
 }
+*/////////////////////
+/******************find local minima in an array
+int localMinima(int *arr,int start,int last)
+{
+
+        int mid=(last+start)/2;
+        if((mid==0||arr[mid]<arr[mid-1])&&(mid==n-1||arr[mid]<arr[mid+1]))
+           {
+                return mid;
+           }
+        else
+            if(arr[mid]>arr[mid-])
+                return localMinima(arr,start,mid-1);
+            else
+                return localMinima(arr,mid+1,last);
+
+}
+*/////////////
+/************Search in a row wise and column wise sorted matrix**/////////////
+bool IsPresentInArray(int **arr,int n,int x)
+{
+    int i=0,j=n-1;
+    while(i<n&&j>=0)
+    {
+        if(arr[i][j]==x)
+        {
+            break;
+        }
+        else
+            if(arr[i][j]<x)
+        {
+            i++;
+        }
+        else
+            if(arr[i][j]>x)
+        {
+            j--;
+        }
+    }
+    if(i<n&&j>=0)
+    {
+        cout<<"element is found at"<<i<<" "<<j;
+        return true;
+    }
+    else
+        return false;
+}
 int main()
 {
 
-   int n,*arr,i,data;
+   int n,i=0,j=0,data;
    cin>>n;
-   arr=new int[n];
+   int **arr=new int*[n];
+   for(int i=0;i<n;i++)
+    arr[i]=new int[n]();
    for(i=0;i<n;i++)
-    cin>>arr[i];
-   cout<<findMajorityElement(arr,n);
-
+    for(j=0;j<n;j++)
+    cin>>arr[i][j];
+    cout<<"\n enter element to be searched";
+    cin>>data;
+   if(IsPresentInArray(arr,n,data))
+for(int i=0;i<n;i++)
+    delete[] arr[i];
    delete[] arr;
 }
