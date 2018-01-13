@@ -192,6 +192,7 @@ bool IsPresentInArray(int **arr,int n,int x)
         return false;
 }
 **/////////////
+/**************finding row with maximum 1 in an array
 int leftMostBinarySearch(int *arr,int start,int last,int data)
 {
     if(start>last)
@@ -222,21 +223,57 @@ int rowWithMaximum_1(int **arr,int n)
     return row_max;
 
 }
+*/////////////
+/****************dutch flag algorithm*////////////////
+void swapMy(int * &arr,int i,int j)
+{
+    int temp=arr[i];
+    arr[i]=arr[j];
+    arr[j]=temp;
+}
+void DutchFlagAlgo(int * &arr,int n)
+{
+    int start=0,mid=0,last=n-1;
+    while(mid<=last)
+    {
+        switch(arr[mid])
+        {
+        case 0:
+            swapMy(arr,mid,start);
+            mid++;
+            start++;
+            break;
+         case 1:
+            mid++;
+            break;
+         case 2:
+            swapMy(arr,mid,last);
+            last--;
+            break;
+        }
+    }
+}
 int main()
 {
 
    int n,i=0,j=0,data;
    cin>>n;
-   int **arr=new int*[n];
+   /* int **arr=new int*[n];
    for(int i=0;i<n;i++)
-    arr[i]=new int[n]();
+   arr[i]=new int[n]();
    for(i=0;i<n;i++)
-    for(j=0;j<n;j++)
-    cin>>arr[i][j];
-    cout<<"\n enter element to be searched:";
-    cin>>data;
+   for(j=0;j<n;j++)
+   cin>>arr[i][j];
+   cout<<"\n enter element to be searched:";
+   cin>>data;
    cout<<rowWithMaximum_1(arr,n);
-    for(int i=0;i<n;i++)
-    delete[] arr[i];
+   for(int i=0;i<n;i++)
+   delete[] arr[i];*/
+   int *arr=new int[n];
+   for(int i=0;i<n;i++)
+    cin>>arr[i];
+   DutchFlagAlgo(arr,n);
+   for(int i=0;i<n;i++)
+    cout<<arr[i]<<" ";
    delete[] arr;
 }
