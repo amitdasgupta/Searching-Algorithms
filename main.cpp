@@ -254,6 +254,7 @@ void DutchFlagAlgo(int * &arr,int n)
     }
 }
 *////////////////
+/*****************code for maximum difference in an array
 int maximumDifferenceNumbers(int *arr,int n)
 {
     int min=arr[0],diffmax=INT_MIN,temp;
@@ -270,25 +271,26 @@ int maximumDifferenceNumbers(int *arr,int n)
     }
     return diffmax;
 }
-int main()
+*////////////
+/*******************code to find number of trailing zeroes in n factorial*//////////////
+int countTrailingZeroes(int n)
 {
-
-   int n,i=0,j=0,data;
-   cin>>n;
-   /* int **arr=new int*[n];
-   for(int i=0;i<n;i++)
-   arr[i]=new int[n]();
-   for(i=0;i<n;i++)
-   for(j=0;j<n;j++)
-   cin>>arr[i][j];
-   cout<<"\n enter element to be searched:";
-   cin>>data;
-   cout<<rowWithMaximum_1(arr,n);
-   for(int i=0;i<n;i++)
-   delete[] arr[i];*/
-   int *arr=new int[n];
-   for(int i=0;i<n;i++)
-    cin>>arr[i];
-   cout<<maximumDifferenceNumbers(arr,n);
-   delete[] arr;
+    if(n<0)
+        return 0;
+    else
+    {
+        int count=0;
+        int i=5;
+        while(n/i>0)
+        {
+            count+=n/i;
+            i=i*5;
+        }
+        return count;
+    }
+}
+int main()
+{int n;
+ cin>>n;
+ cout<<countTrailingZeroes(n);
 }
