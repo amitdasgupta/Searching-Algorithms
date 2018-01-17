@@ -272,7 +272,7 @@ int maximumDifferenceNumbers(int *arr,int n)
     return diffmax;
 }
 *////////////
-/*******************code to find number of trailing zeroes in n factorial*//////////////
+/*******************code to find number of trailing zeroes in n factorial
 int countTrailingZeroes(int n)
 {
     if(n<0)
@@ -289,8 +289,48 @@ int countTrailingZeroes(int n)
         return count;
     }
 }
+*//////////////
+/*************given an array find the maximum j-i where A[j]>A[i]*////////////////
+int findMaximumIndexDifference(int *arr,int n)
+{
+    int *Larray,*Rarray;
+    Larray=new int[n];
+    Rarray=new int[n];
+    Larray[0]=arr[0];
+    for(int i=1;i<n;i++)
+        Larray[i]=min(Larray[i-1],arr[i]);
+    Rarray[n-1]=arr[n-1];
+    for(int j=n-2;j>=0;j--)
+    {
+        Rarray[j]=max(Rarray[j+1],arr[j]);
+    }
+    int i=0,j=0,count=INT_MIN;
+    while(i<n&&j<n)
+    {
+        if(Larray[i]>Rarray[j])
+        {
+            i++;
+        }
+        else
+        {
+            if((j-i)>count)
+            {
+                count=j-i;
+            }
+            j++;
+        }
+    }
+    delete[] Larray;
+    delete[] Rarray;
+    return count;
+}
 int main()
-{int n;
- cin>>n;
- cout<<countTrailingZeroes(n);
+{
+    int *arr,n;
+    cin>>n;
+    arr=new int[n];
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    cout<<findMaximumIndexDifference(arr,n);
+    delete[] arr;
 }
